@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invila Odometer Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-car.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #0f172a; /* Warna background biru gelap */
+            color: #f8fafc; /* Warna teks putih */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 80px;
+        }
+        .odometer {
+            font-size: 80px; /* Ukuran angka meteran */
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .panel-bawah {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 40px;
+            border: 2px solid #334155;
+        }
+    </style>
+</head>
+<body>
+
+    <h3 style="color: #94a3b8;">KAPASITAS TAHUNAN NASIONAL INVILA™</h3>
+    
+    <div id="meteranAir" class="odometer">0</div>
+    <div style="color: #38bdf8; font-size: 24px; font-weight: bold; margin-bottom: 30px;">m³ / tahun</div>
+
+    <div class="panel-bawah">
+        <p style="color: #94a3b8; font-size: 14px; margin: 0;">Bukti Penambahan Proyek:</p>
+        <p id="teksProyek" style="color: #38bdf8; font-size: 18px; font-weight: bold; margin: 5px 0 0 0;">
+            Menyiapkan mesin...
+        </p>
+    </div>
+
+    <script>
+        const elemenMeteran = document.getElementById('meteranAir');
+        const elemenTeks = document.getElementById('teksProyek');
+        
+        // Data proyek yang tadi kita susun
+        const dataProyek = [
+            { nama: "PDAM Tirtanadi Clarifier 6", total: 15552000 },
+            { nama: "PDAM Tirtanadi Clarifier 1", total: 31104000 },
+            { nama: "WTP 300 LPS Depok", total: 40435200 },
+            { nama: "PT Petro Kimia Gresik", total: 75686400 },
+            { nama: "IPAL PT Kievit Salatiga", total: 75934800 },
+            { nama: "Management Industrial Estate Tugu", total: 78008400 }
+        ];
+
+        let urutan = 0;
+
+        function putarMeteran() {
+            if (urutan < dataProyek.length) {
+                // Update teks proyek di bawah
+                elemenTeks.style.color = "#38bdf8";
+                elemenTeks.innerHTML = "Menambahkan: " + dataProyek[urutan].nama;
+                
+                // Putar angka meterannya
+                elemenMeteran.innerHTML = dataProyek[urutan].total;
+                
+                urutan++;
+                // Tunggu 3 detik sebelum lanjut ke proyek berikutnya
+                setTimeout(putarMeteran, 3000); 
+            } else {
+                // Kalau sudah selesai semua
+                elemenTeks.style.color = "#10b981"; // Berubah warna jadi hijau
+                elemenTeks.innerHTML = "✓ VERIFIED: 78 Juta m³/tahun (Feb 2026)";
+            }
+        }
+
+        // Mulai animasi setelah 1 detik
+        setTimeout(putarMeteran, 1000);
+    </script>
+
+</body>
+</html>
